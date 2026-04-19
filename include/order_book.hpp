@@ -11,13 +11,14 @@
 class OrderBook {
 public:
     void addOrder(Order order);
-    
-    void printBook() const;
-    void printTrades() const;
-    
+    bool cancelOrder(std::uint64_t orderId);
+
     std::optional<int> bestBid() const;
     std::optional<int> bestAsk() const;
-    
+
+    void printBook() const;
+    void printTrades() const;
+
 private:
     void matchBuyOrder(Order& incomingOrder);
     void matchSellOrder(Order& incomingOrder);

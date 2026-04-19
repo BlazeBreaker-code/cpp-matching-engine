@@ -82,6 +82,32 @@ void OrderBook::matchSellOrder(Order& incomingOrder) {
     }
 }
 
+bool OrderBook::cancelOrder(std::uint64_t orderId) {
+    for (auto levelIt = bids_.begin(); levelIt != bids_.end(); ++levelIt) {
+        auto& orders = levelIt->second;
+        auto it = std::find_if(orders.begin(), orders.end(),
+            [orderId](const Order& o) { return o.id == orderId; });
+        
+        if (it == orders.end()) continue;
+        orders.erase(it);
+        if (orders.empty()) bids_.erase(levelIt);
+        return true;
+    }
+
+    for (auto levelIt = asks_.begin(); levelIt != asks_.end(); ++levelIt) {
+        auto& orders = levelIt->second;
+        auto it = std::find_if(orders.begin(), orders.end(),
+            [orderId](const Order& o) { return o.id == orderId; });
+        
+        if (it == orders.end()) continue;
+        orders.erase(it);
+        if (orders.empty()) asks_.erase(levelIt);
+        return true;
+    }
+
+    return false;
+}
+
 void OrderBook::printBook() const {
     std::cout << "\n=== ORDER BOOK ===\n";
 

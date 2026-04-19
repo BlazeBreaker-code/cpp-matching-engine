@@ -14,12 +14,16 @@ int main() {
     book.printTrades();
     book.printBook();
 
+    std::cout << "\n=== CANCEL TEST ===\n";
+    std::cout << "Cancel order 4: " << (book.cancelOrder(4) ? "true" : "false") << '\n';
+    std::cout << "Cancel order 999: " << (book.cancelOrder(999) ? "true" : "false") << '\n';
+
+    book.printBook();
+
     const auto bestBid = book.bestBid();
     const auto bestAsk = book.bestAsk();
 
     std::cout << "\n=== TOP OF BOOK ===\n";
     std::cout << "Best Bid: " << (bestBid ? std::to_string(*bestBid) : "None") << '\n';
     std::cout << "Best Ask: " << (bestAsk ? std::to_string(*bestAsk) : "None") << '\n';
-
-    return 0;
 }
