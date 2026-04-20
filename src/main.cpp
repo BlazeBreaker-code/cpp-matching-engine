@@ -1,23 +1,16 @@
 #include <iostream>
 
-#include "order.hpp"
 #include "order_book.hpp"
+#include "simulator.hpp"
 
 int main() {
     OrderBook book;
+    Simulator simulator(book);
 
-    book.addOrder(Order{1, Side::Buy, 100, 10});
-    book.addOrder(Order{2, Side::Sell, 101, 5});
-    book.addOrder(Order{3, Side::Sell, 100, 4});
-    book.addOrder(Order{4, Side::Buy, 101, 6});
+    simulator.run(100);
+    simulator.printSummary();
 
     book.printTrades();
-    book.printBook();
-
-    std::cout << "\n=== CANCEL TEST ===\n";
-    std::cout << "Cancel order 4: " << (book.cancelOrder(4) ? "true" : "false") << '\n';
-    std::cout << "Cancel order 999: " << (book.cancelOrder(999) ? "true" : "false") << '\n';
-
     book.printBook();
 
     const auto bestBid = book.bestBid();
@@ -26,4 +19,6 @@ int main() {
     std::cout << "\n=== TOP OF BOOK ===\n";
     std::cout << "Best Bid: " << (bestBid ? std::to_string(*bestBid) : "None") << '\n';
     std::cout << "Best Ask: " << (bestAsk ? std::to_string(*bestAsk) : "None") << '\n';
+
+    return 0;
 }

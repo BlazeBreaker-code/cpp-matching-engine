@@ -9,4 +9,5 @@ include_directories(include)
 add_executable(engine
     src/main.cpp
     src/order_book.cpp
+    src/simulator.cpp
 )
