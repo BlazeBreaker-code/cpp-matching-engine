@@ -10,11 +10,15 @@
 
 class OrderBook {
 public:
-    void addOrder(Order order);
+    bool addOrder(Order order);
     bool cancelOrder(std::uint64_t orderId);
 
     std::optional<int> bestBid() const;
     std::optional<int> bestAsk() const;
+    std::optional<int> spread() const;
+
+    std::size_t tradeCount() const;
+    int totalTradedVolume() const;
 
     void printBook() const;
     void printTrades() const;

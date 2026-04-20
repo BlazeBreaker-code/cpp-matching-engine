@@ -34,8 +34,8 @@ void Simulator::processAdd() {
     const int quantity = quantityDist(rng_);
 
     const std::uint64_t orderId = nextOrderId_++;
-    book_.addOrder(Order{orderId, side, price, quantity});
-    liveOrderIds_.push_back(orderId);
+    const bool rested = book_.addOrder(Order{orderId, side, price, quantity});
+    if (rested) liveOrderIds_.push_back(orderId);
     ++addsProcessed_;
 }
 

@@ -3,15 +3,26 @@
 #include <algorithm>
 #include <iostream>
 
-void OrderBook::addOrder(Order order) {
+bool OrderBook::addOrder(Order order) {
     if (order.side == Side::Buy) {
         matchBuyOrder(order);
-        if (order.quantity > 0) bids_[order.price].push_back(order);
-        return;
+
+        if (order.quantity > 0) {
+            bids_[order.price].push_back(order);
+            return true;
+        } 
+
+        return false;
     }
 
     matchSellOrder(order);
-    if (order.quantity > 0) asks_[order.price].push_back(order);
+
+    if (order.quantity > 0) {
+        asks_[order.price].push_back(order);
+        return true;
+    }
+
+    return false;
 }
 
 std::optional<int> OrderBook::bestBid() const {
@@ -105,7 +116,26 @@ bool OrderBook::cancelOrder(std::uint64_t orderId) {
         return true;
     }
 
+
     return false;
+}
+
+std::size_t OrderBook::tradeCount() const {
+    return trades_.size();
+}
+
+int OrderBook::totalTradedVolume() const {
+    int totalVolume = 0;
+    for (const auto& trade : trades_) totalVolume += trade.quantity;
+    return totalVolume;
+}
+
+std::optional<int> OrderBook::spread() const {
+    const auto bid = bestBid();
+    const auto ask = bestAsk();
+
+    if (!bid || !ask) return std::nullopt;
+    return *ask - *bid;
 }
 
 void OrderBook::printBook() const {
