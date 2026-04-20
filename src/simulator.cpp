@@ -4,8 +4,8 @@
 
 #include "order.hpp"
 
-Simulator::Simulator(OrderBook& orderBook) 
-    : book_(orderBook), rng_(std::random_device{}()) {}
+Simulator::Simulator(OrderBook& orderBook, std::uint64_t seed) 
+    : book_(orderBook), rng_(seed), seed_(seed) {}
 
 void Simulator::run(int eventCount) {
     std::uniform_int_distribution<int> actionDist(1, 100);
@@ -58,6 +58,7 @@ void Simulator::processCancel() {
 
 void Simulator::printSummary() const {
     std::cout << "\n=== SIMULATION SUMMARY ===\n";
+    std::cout << "Seed: " << seed_ << '\n';
     std::cout << "Total Events Processed: " << eventsProcessed_ << '\n';
     std::cout << "Add Orders Processed: " << addsProcessed_ << '\n';
     std::cout << "Cancel Attempts: " << cancelsAttempted_ << '\n';

@@ -8,7 +8,7 @@
 
 class Simulator {
 public:
-    explicit Simulator(OrderBook& orderBook);
+    explicit Simulator(OrderBook& orderBook, std::uint64_t seed);
 
     void run(int eventCount);
     void printSummary() const;
@@ -18,8 +18,8 @@ private:
     void processCancel();
 
     OrderBook& book_;
-
     std::mt19937 rng_;
+    std::uint64_t seed_;
     std::uint64_t nextOrderId_ = 1;
 
     std::vector<std::uint64_t> liveOrderIds_;

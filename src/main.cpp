@@ -5,8 +5,10 @@
 
 int main() {
     OrderBook book;
-    Simulator simulator(book);
 
+    constexpr std::uint64_t seed = 42;
+    Simulator simulator(book, seed);
+    
     simulator.run(100);
     simulator.printSummary();
 
@@ -32,6 +34,6 @@ int main() {
         tradeCount == 0 ? 0.0 : static_cast<double>(book.totalTradedVolume()) / tradeCount;
 
     std::cout << "Average Trade Size: " << averageTradeSize << '\n';
-    
+
     return 0;
 }
