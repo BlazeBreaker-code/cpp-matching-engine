@@ -1,6 +1,7 @@
 #include <chrono>
 #include <iomanip>
 #include <iostream>
+#include <string>
 
 #include "order_book.hpp"
 #include "simulator.hpp"

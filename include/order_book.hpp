@@ -2,7 +2,9 @@
 
 #include <cstdint>
 #include <deque>
+#include <functional>
 #include <map>
+#include <optional>
 #include <vector>
 
 #include "order.hpp"

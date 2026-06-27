@@ -40,13 +40,13 @@ Tracks key performance metrics including:
     Seed: 42
     Events: 100000
 
-    Trades Executed: 57956
-    Total Traded Volume: 176130
+    Trades Executed: 58189
+    Total Traded Volume: 177043
     Final Spread: 1
-    Average Trade Size: 3.04
+    Average Trade Size: 3.042551
 
-    Elapsed Time: 0.381939s
-    Throughput: 261821.68 events/sec
+    Elapsed Time: 0.051799s
+    Throughput: 1,930,535.47 events/sec
 
 ---
 
